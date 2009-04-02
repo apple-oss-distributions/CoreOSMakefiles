@@ -1,12 +1,16 @@
 ##
 # Standard Variables
+#ifdef BSDMAKESTYLE
+#
+# (Created from /Developer/Makefiles/CoreOS/Standard/Variables.make)
+#endif
 #
 # Wilfredo Sanchez | wsanchez@apple.com
 # Copyright (c) 1997-1999 Apple Computer, Inc.
 #
 # @APPLE_LICENSE_HEADER_START@
 # 
-# Portions Copyright (c) 1999 Apple Computer, Inc.  All Rights
+# Portions Copyright (c) 1999-2009 Apple Inc.  All Rights
 # Reserved.  This file contains Original Code and/or Modifications of
 # Original Code as defined in and that are subject to the Apple Public
 # Source License Version 1.1 (the "License").  You may not use this file
@@ -28,44 +32,109 @@
 ##
 # Where to find Makefiles
 ##
+#ifdef BSDMAKESTYLE
+MAKEFILEPATH = /usr/share/mk
+.ifndef CoreOSMakefiles
+#else
 ifndef CoreOSMakefiles
+#endif
 CoreOSMakefiles = $(MAKEFILEPATH)/CoreOS
+#ifdef BSDMAKESTYLE
+.else
+#else
 else
+#endif
+#ifdef BSDMAKESTYLE
+CoreOSMakefiles != cd $(CoreOSMakefiles) && pwd
+#else
 CoreOSMakefiles := $(shell cd $(CoreOSMakefiles) && pwd)
+#endif
+#ifdef BSDMAKESTYLE
+.endif
+#else
 endif
+#endif
 
 ##
 # Verbosity
 ##
+#ifdef BSDMAKESTYLE
+.if defined(RC_JASPER) && $(RC_JASPER) == YES
+#else
 ifeq ($(RC_JASPER),YES)
+#endif
 VERBOSE = YES
+#ifdef BSDMAKESTYLE
+.else
+#else
 else
+#endif
 VERBOSE = NO
+#ifdef BSDMAKESTYLE
+.endif
+#else
 endif
+#endif
 
+#ifdef BSDMAKESTYLE
+_v = $(VERBOSE:S/YES//:S/NO/@/)
+#else
 _v = $(subst NO,@,$(subst YES,,$(VERBOSE)))
+#endif
+#ifdef BSDMAKESTYLE
+_q = $(VERBOSE:S/NO//:S/YES/@/)
+#else
 _q = $(subst YES,@,$(subst NO,,$(VERBOSE)))
+#endif
 
 ##
 # Working Directory
 ##
+#ifdef BSDMAKESTYLE
+WD != pwd
+#else
 WD := $(shell pwd)
+#endif
 
 ##
 # User
 ##
+#ifdef BSDMAKESTYLE
+USER != whoami
+#else
 USER = $(shell whoami)
+#endif
 
 ##
 # Host Platform
 ##
+#ifdef BSDMAKESTYLE
+.if !exists($(UNAME))
+#else
 ifeq ($(wildcard $(UNAME)),)
+#endif
 OSName    := unknown
 OSVersion := unknown
+#ifdef BSDMAKESTYLE
+.else
+#else
 else
+#endif
+#ifdef BSDMAKESTYLE
+OSName    != $(UNAME) -s
+#else
 OSName    := $(shell $(UNAME) -s)
+#endif
+#ifdef BSDMAKESTYLE
+OSVersion != $(UNAME) -r
+#else
 OSVersion := $(shell $(UNAME) -r)
+#endif
+#ifdef BSDMAKESTYLE
+.endif
+#else
 endif
+#endif
 
 ##
 # Find Garbage
