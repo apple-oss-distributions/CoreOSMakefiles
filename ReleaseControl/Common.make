@@ -130,12 +130,7 @@ install_source::
 ifneq ($(CommonNoInstallSource),YES)
 	@echo "Installing source for $(Project)..."
 	$(_v) $(MKDIR) "$(SRCROOT)"
-ifneq ($(wildcard $(PAX)),)
-	$(_v) $(PAX) -rw . "$(SRCROOT)"
-else
-	$(_v) $(TAR) cf - . | (cd "$(SRCROOT)" ; $(TAR) xfp -)
-endif
-	$(_v) $(FIND) "$(SRCROOT)" $(Find_Cruft) -depth -exec $(RMDIR) "{}" \;
+	$(_v) $(TAR) -cp $(Tar_Cruft) . | $(TAR) -pox -C "$(SRCROOT)"
 endif
 
 ifndef ShadowTestFile

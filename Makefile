@@ -28,7 +28,7 @@ installhdrs:
 
 installsrc:
 	install -d "$(SRCROOT)"
-	rsync -a --exclude=.svn ./ "$(SRCROOT)"
+	rsync -a --exclude=.svn --exclude=.git ./ "$(SRCROOT)"
 
 clean:
 	$(_v) echo Nothing to clean

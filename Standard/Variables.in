@@ -139,8 +139,9 @@ endif
 ##
 # Find Garbage
 ##
-Cruft      = CVS RCS SCCS *~ .*~ .nfs\* .*.wmd .svn .DS_Store
+Cruft      = CVS RCS SCCS *~ .*~ .nfs\* .*.wmd .svn .DS_Store .git
 Find_Cruft = '(' $(Cruft:%=-name '%' -or) -name '' ')' -print
+Tar_Cruft  = $(Cruft:%=--exclude '%')
 
 ##
 # Install
