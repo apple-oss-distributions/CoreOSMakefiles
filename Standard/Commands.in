@@ -64,7 +64,6 @@ AS      != $(PATH_OF_COMMAND) as
 #else
 AS      = $(shell $(PATH_OF_COMMAND) as)
 #endif
-ARSH    = $(MAKEFILEPATH)/bin/ar.sh
 #ifdef BSDMAKESTYLE
 BISON   != $(PATH_OF_COMMAND) bison
 #else
@@ -294,7 +293,6 @@ TEST        = /bin/test
 TEXI2HTML   = /usr/bin/texi2html
 TRUE        = /usr/bin/true
 UNAME       = /usr/bin/uname
-VERS_STRING = /usr/bin/vers_string
 WHICH       = /usr/bin/which
 WHOAMI      = /usr/bin/whoami
 YES         = /usr/bin/yes

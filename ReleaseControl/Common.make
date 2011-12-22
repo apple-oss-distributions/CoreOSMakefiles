@@ -69,7 +69,7 @@ endif
 ifneq ($(RC_VERSION),unknown)
 Version = RC_VERSION
 else
-Version := $(shell $(VERS_STRING) -f $(Project) 2>/dev/null | cut -d - -f 2)
+Version = $(RC_ProjectSourceVersion)
 ifeq ($(Version),)
 Version = 0
 endif
@@ -81,6 +81,9 @@ BuildDirectory = $(OBJROOT)
 
 CC_Archs      = $(RC_ARCHS:%=-arch %)
 #CPP_Defines += -DPROJECT_VERSION=\"$(Project)-$(Version)\"
+
+Environment += CC="$(CC)"
+Environment += CXX="$(CXX)"
 
 ifneq "$(strip $(CFLAGS))" ""
 Environment += CFLAGS="$(CFLAGS)"
@@ -178,7 +181,4 @@ rshowvar: showvar
 	$(_v) $(MAKE) recurse TARGET=rshowvar
 
 compress_man_pages:
-ifneq "$(strip $(ManPageDirectories))" ""
-	@echo "Compressing man pages for $(Project)..."
-	$(_v) $(COMPRESSMANPAGES) $(ManPageDirectories)
-endif
+	@echo "Man pages are no longer compressed.  Please remove the compress_man_pages target from your Makefile."

@@ -226,7 +226,6 @@ ifneq ($(LAUNCHD_PLISTS),)
 	@make install-launchd-plists
 endif
 	@make after_install
-	@$(MAKE) compress_man_pages
 
 migdefs::
 	@$(MKDIR) $(OBJROOT)/$(Project)

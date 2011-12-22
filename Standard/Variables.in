@@ -59,9 +59,9 @@ endif
 # Verbosity
 ##
 #ifdef BSDMAKESTYLE
-.if defined(RC_JASPER) && $(RC_JASPER) == YES
+.if defined(RC_XBS) && $(RC_XBS) == YES
 #else
-ifeq ($(RC_JASPER),YES)
+ifeq ($(RC_XBS),YES)
 #endif
 VERBOSE = YES
 #ifdef BSDMAKESTYLE

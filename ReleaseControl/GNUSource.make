@@ -133,7 +133,6 @@ endif
 ifdef GnuAfterInstall
 	$(_v) $(MAKE) $(GnuAfterInstall)
 endif
-	$(_v) $(MAKE) compress_man_pages
 
 build:: configure
 ifneq ($(GnuNoBuild),YES)

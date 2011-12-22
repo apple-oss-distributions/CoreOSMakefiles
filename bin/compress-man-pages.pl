@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Copyright (c) 2005 Apple Computer, Inc. All rights reserved.
+# Copyright (c) 2011 Apple Inc. All rights reserved.
 #
 # @APPLE_LICENSE_HEADER_START@
 # 
@@ -20,77 +20,5 @@
 # 
 # @APPLE_LICENSE_HEADER_END@
 
-use strict;
-use File::Basename ();
-use File::Find ();
-use Getopt::Std ();
-
-my $MyName = File::Basename::basename($0);
-my $N = 100;
-my $MinSize = 64;
-my %inodes;
-my @symlinks;
-our $opt_d = '';
-
-sub wanted {
-    return unless /\.[\dn][a-z]*$/;
-    if(-l $_) {
-	push(@symlinks, $_);
-    } elsif(-f _) {
-	return if -s _ < $MinSize;
-	my($dev, $ino) = stat(_);
-	my $list = $inodes{$ino};
-	$list = $inodes{$ino} = [] unless defined($list);
-	push(@$list, $_);
-    }
-}
-
-sub usage {
-    die "Usage: $MyName [-d prefix] dir ...\n";
-}
-
-Getopt::Std::getopts('d:');
-usage() unless scalar(@ARGV) > 0;
-
-for my $dir (@ARGV) {
-    $dir = $opt_d . $dir if $opt_d ne '';
-    next unless -e $dir;
-    die "$dir: no such directory\n" unless -d _;
-
-    %inodes = ();
-    @symlinks = ();
-    File::Find::find({
-	wanted => \&wanted,
-	no_chdir => 1,
-    }, $dir);
-
-    my(@compress, @links);
-    for(values(%inodes)) {
-	push(@compress, $_->[0]);
-	push(@links, $_) if scalar(@$_) > 1;
-    }
-
-    my $count;
-    while(($count = scalar(@compress)) > 0) {
-	$_ = $count > $N ? $N : $count;
-	my @args = splice(@compress, 0, $_);
-	print "gzip -f -n @args\n";
-	system('gzip', '-f', '-n', @args) == 0 or die "gzip failed\n";;
-    }
-    foreach my $list (@links) {
-	my $main = shift(@$list);
-	for(@$list) {
-	    printf "rm $_; ln -f $main.gz $_.gz\n";
-	    unlink $_ or die "Can't unlink: $!\n";
-	    unlink "$_.gz";
-	    link("$main.gz", "$_.gz") or die "Can't link: $!\n";;
-	}
-    }
-    for(@symlinks) {
-	my $link = readlink($_);
-	printf "rm $_; ln -fs $link.gz $_.gz\n";
-	unlink $_ or die "Can't unlink: $!\n";
-	unlink "$_.gz";
-	symlink("$link.gz", "$_.gz") or die "Can't symlink: $!\n";
-    }
-}
+# <rdar://problem/9910865> man pages should not be compressed
+printf "compress-man-pages.pl is now a nop.  Please remove it from your build script.\n";
