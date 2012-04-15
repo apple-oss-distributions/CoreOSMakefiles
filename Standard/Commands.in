@@ -282,7 +282,6 @@ PACKAGE   = /usr/bin/package
 # Miscellaneous
 ##
 ARCH        = /usr/bin/arch
-COMPRESSMANPAGES = $(MAKEFILEPATH)/bin/compress-man-pages.pl -d $(DSTROOT)
 ECHO        = echo
 FALSE       = /usr/bin/false
 PLUTIL      = /usr/bin/plutil

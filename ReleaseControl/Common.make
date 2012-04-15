@@ -107,19 +107,13 @@ ManPageDirectories = /usr/share/man
 # Targets
 ##
 
-.PHONY: all install installhdrs install_headers lazy_installsrc lazy_install_source installsrc install_source build clean recurse _targetconfig
+.PHONY: all install installhdrs install_headers lazy_installsrc lazy_install_source installsrc install_source build clean recurse
 
 all: build
 
 $(DSTROOT): install
 
-install:: _targetconfig install_headers build
-
-_targetconfig::
-	@PRODUCT="`tconf --product 2>/dev/null`" ; \
-	if [ -z "$$PRODUCT" ]; then \
-	echo "Error: TargetConfig not defined" ; exit 1 ; \
-	else echo "TargetConfig: $$PRODUCT" ; fi
+install:: install_headers build
 
 # For RC
 installhdrs:: install_headers
