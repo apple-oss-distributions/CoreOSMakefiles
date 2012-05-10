@@ -11,7 +11,6 @@ STANDARD    = Standard
 install:
 	@$(MAKE) installsrc SRCROOT=$(DSTROOT)$(Destination)
 	rm -f $(DSTROOT)$(Destination)/Makefile
-	mv -f $(DSTROOT)$(Destination)/bin $(DSTROOT)$(DEVELOPER_DIR)/Makefiles
 	@set -x && \
 	    for i in $(INBASENAMES); do \
 		unifdef -U$(BSDDEFINE) -t $(DSTROOT)$(Destination)/$(STANDARD)/$$i$(INSUFFIX) > $(DSTROOT)$(Destination)/$(STANDARD)/$$i$(GNUSUFFIX); \
