@@ -5,7 +5,7 @@ DEAD_CODE_STRIPPING = YES;
 DEBUG_INFORMATION_FORMAT = dwarf-with-dsym;
 PREBINDING = NO;
 // Current Mac OS
-SDKROOT = ;
+SDKROOT = macosx.internal;
 //USE_HEADERMAP = NO;
 VERSION_INFO_PREFIX = __;
 VERSIONING_SYSTEM = apple-generic;
