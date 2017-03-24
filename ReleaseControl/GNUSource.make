@@ -1,12 +1,11 @@
 ##
 # Makefile for Apple Release Control (GNU source projects)
 #
-# Wilfredo Sanchez | wsanchez@apple.com
-# Copyright (c) 1997-1999 Apple Computer, Inc.
+# Copyright (c) 1997-1999,2017 Apple, Inc.
 #
 # @APPLE_LICENSE_HEADER_START@
 # 
-# Portions Copyright (c) 1999 Apple Computer, Inc.  All Rights
+# Portions Copyright (c) 1999,2017 Apple, Inc.  All Rights
 # Reserved.  This file contains Original Code and/or Modifications of
 # Original Code as defined in and that are subject to the Apple Public
 # Source License Version 1.1 (the "License").  You may not use this file
@@ -64,11 +63,7 @@ ifndef Install_Info
 Install_Info = $(SHAREDIR)/info
 endif
 ifndef Install_HTML
-ifeq "$(UserType)" "Developer"
-Install_HTML = $(SYSTEM_DEVELOPER_TOOLS_DOC_DIR)/$(ProjectName)
-else
-Install_HTML = $(NSDOCUMENTATIONDIR)/$(ToolType)/$(ProjectName)
-endif
+Install_HTML = $(SHAREDIR)/html/$(ProjectName)
 endif
 ifndef Install_Source
 Install_Source = $(NSSOURCEDIR)/$(ToolType)/$(ProjectName)

@@ -5,12 +5,11 @@
 # (Created from /Developer/Makefiles/CoreOS/Standard/Variables.make)
 #endif
 #
-# Wilfredo Sanchez | wsanchez@apple.com
-# Copyright (c) 1997-1999 Apple Computer, Inc.
+# Copyright (c) 1997-1999,2017 Apple, Inc.
 #
 # @APPLE_LICENSE_HEADER_START@
 # 
-# Portions Copyright (c) 1999-2009 Apple Inc.  All Rights
+# Portions Copyright (c) 1999-2009,2017 Apple Inc.  All Rights
 # Reserved.  This file contains Original Code and/or Modifications of
 # Original Code as defined in and that are subject to the Apple Public
 # Source License Version 1.1 (the "License").  You may not use this file
@@ -206,8 +205,6 @@ USRLIBDIR             = $(USRDIR)/lib
 USRSBINDIR            = $(USRDIR)/sbin
 VARDIR                = /private/var
 VARTMPDIR             = $(VARDIR)/tmp
-
-SYSTEM_DEVELOPER_TOOLS_DOC_DIR = $(NSDEVELOPERDIR)/Documentation/DocSets/com.apple.ADC_Reference_Library.DeveloperTools.docset/Contents/Resources/Documents/documentation/DeveloperTools
 
 ##
 # Targets
