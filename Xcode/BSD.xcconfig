@@ -7,6 +7,5 @@ PREBINDING = NO;
 // Current Mac OS
 SDKROOT = macosx.internal;
 //USE_HEADERMAP = NO;
-VERSION_INFO_PREFIX = __;
+VERSION_INFO_PREFIX = __attribute__((visibility("hidden"))) __
 VERSIONING_SYSTEM = apple-generic;
-
